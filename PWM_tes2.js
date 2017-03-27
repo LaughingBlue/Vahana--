@@ -20,3 +20,9 @@ setInterval(function () {
   }
   dutyCycle += direction;
 }, 5);
+
+process.on("SIGINT", function () {
+  led.pwmWrite(0);
+  console.log("Caught interrupt signal");
+  process.exit();
+});
