@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Control UI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+    <!-- <style>
+        #camera_view {
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: auto;
+            background: url() no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style> -->
+</head>
+
+<body>
+    <div data-role="page" id="joystick">
+        <img id="camera_view" width="100%" height="auto" alt="No Video Streaming Available!">
+    </div>
+
+    <script src="scripts/jquery-2.1.4.min.js"></script>
+    <script src="scripts/jquery.mobile-1.4.5.js"></script>
+    <script src="scripts/socket.io.js"></script>
+    <script src="node_modules/nipplejs/dist/nipplejs.min.js"></script>
+    <script>
+        var nippleManager = nipplejs.create({
+            zone: document.getElementById('joystick'),
+            mode: 'semi',
+            catchDistance: 150,
+            color: 'blue'
+        });
+        //var ip_server = <% serverip %>;
+        var port_webvideostreaming = '8000';
+        var web_video_streaming_url = 'http://' + ip_server + ':' + webvideostreaming + '/stream.mjpg';
+        var streamingelement = document.getElementById("camera_view");
+
+        function loadstreaming() {
+            streamingelement.src=web_video_streaming_url;
+        }
+
+        function offloadstreaming() {
+            streamingelement.src = "./stream.mjpg.jpg";
+            //$("#camera_view").attr("src", "/stream.mjpg.jpg");
+            //streamingelement.reload();
+        }
+        
+        offloadstreaming();
+        //loadstreaming();
+    </script>
+</body>
+
+</html>

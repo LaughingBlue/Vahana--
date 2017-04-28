@@ -1,0 +1,20 @@
+{
+  "name": "vahana-kai",
+  "version": "0.0.2",
+  "description": "Drift!",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaughingBlue/Vahana-KAI.git"
+  },
+  "author": "LaughingBlue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LaughingBlue/Vahana-KAI/issues"
+  },
+  "homepage": "https://github.com/LaughingBlue/Vahana-KAI#readme"
+}
