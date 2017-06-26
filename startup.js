@@ -50,8 +50,10 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+/*
+ * production error handler
+ * no stacktraces leaked to user
+ */
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -62,34 +64,30 @@ app.use(function (err, req, res, next) {
 
 //====================================================
 
-var debug = require('debug')('nodejsproject1:server');
+var debug = require('debug')('vahana-kai:server');
 var http = require('http');
 
-/**
+/*
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
+/*
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
 
-/**
+/*
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
+/*
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
@@ -106,10 +104,9 @@ function normalizePort(val) {
   return false;
 }
 
-/**
+/*
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -137,7 +134,6 @@ function onError(error) {
 /*
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'

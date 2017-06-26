@@ -20,11 +20,18 @@
             background-size: cover;
         }
     </style> -->
+
+
 </head>
 
 <body>
     <div data-role="page" id="joystick">
-        <img id="camera_view" width="100%" height="auto" alt="No Video Streaming Available!">
+        <div data-role="header" data-position="fixed">
+            <h1>UI Prototype</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <img id="camera_view" width="100%" height="auto" alt="No Resource Available!">
+        </div>
     </div>
 
     <script src="scripts/jquery-2.1.4.min.js"></script>
@@ -38,17 +45,32 @@
             catchDistance: 150,
             color: 'blue'
         });
-        //var ip_server = <% serverip %>;
-        var port_webvideostreaming = '8000';
-        var web_video_streaming_url = 'http://' + ip_server + ':' + webvideostreaming + '/stream.mjpg';
-        var streamingelement = document.getElementById("camera_view");
+
+        var socket = io.connect();
+
+        function sendNipple(joystick){
+            socket.emit('ctrlMsg', {
+                "joystick" : joystick
+            });
+        }
+
+        var last = {'directionAngle' : 0, 'outputPower' : 0};
+        var now = {'directionAngle' : 0, 'outputPower' : 0};
+
+        setInterval(function(){
+            now.directionAngle = nippleManager
+        }, 100);
+        //var server_ip = <% ServerIP %>;
+        var server_streamingPort = '8000';
+        var streaming_url = 'http://' + server_ip + ':' + server_streamingPort + '/stream.mjpg';
+        var streamingElement = document.getElementById("camera_view");
 
         function loadstreaming() {
-            streamingelement.src=web_video_streaming_url;
+            streamingelement.src = streaming_url;
         }
 
         function offloadstreaming() {
-            streamingelement.src = "./stream.mjpg.jpg";
+            streamingElement.src = "./stream.mjpg.jpg";
             //$("#camera_view").attr("src", "/stream.mjpg.jpg");
             //streamingelement.reload();
         }
