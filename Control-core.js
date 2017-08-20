@@ -1,4 +1,4 @@
-try {
+//try {
     var Gpio = require('pigpio').Gpio,
         led = new Gpio(18, { mode: Gpio.OUTPUT }),//12/13/18/19
         dutyCycle = 0;
@@ -15,9 +15,9 @@ try {
         .address;
     console.log('Server IP=' + ServerIP);
 
-} catch (err) {
-    console.log('MODULE LOADING ERR:\n' + err);
-}
+//} catch (err) {
+//    console.log('MODULE LOADING ERR:\n' + err);
+//}
 
 router.get('/', function (req, res) {
     var data = {
