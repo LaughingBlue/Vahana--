@@ -52,7 +52,7 @@
             socket.emit('ctrlMsg', {
                 "joystick" : joystick
             });
-        //var server_ip = <% ServerIP %>;
+        var server_ip = <% ServerIP %>;
         var server_streamingPort = '8000';
         var streaming_url = 'http://' + server_ip + ':' + server_streamingPort + '/stream.mjpg';
         var streamingElement = document.getElementById("camera_view");

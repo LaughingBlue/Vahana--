@@ -41,6 +41,7 @@ function streaming_on() {
     fs.writeFileSync('./PiCam-Streamer-status', 'on');
     console.log('The pid and status of web video streaming is saved!');
 }
+module.exports.streaming_on = streaming_on; 
 
 function streaming_off() {
     // 讀取pid of Web Video Streaming
@@ -56,6 +57,7 @@ function streaming_off() {
     fs = require('fs');
     fs.writeFileSync('./PiCam-Streamer-status', 'off');
 }
+module.exports.streaming_off = streaming_off;
 
 function move_on(directionAngle, outputPower) {
     if (directionAngle >= 345 || directionAngle <= 15) { //E
@@ -76,6 +78,7 @@ function move_on(directionAngle, outputPower) {
 
     }
 }
+module.exports.move_on = move_on;
 
 function forceGC() {
     if (global.gc)
@@ -83,5 +86,4 @@ function forceGC() {
     else
         console.warn('[Garbage Collection] NOT AVAILABLE ! Restart Vahana-KAI core as `node --expose-gc start.js`.');
 }
-
-module.exports = control_core;
+module.exports.forceGC = forceGC;
