@@ -52,14 +52,6 @@
             socket.emit('ctrlMsg', {
                 "joystick" : joystick
             });
-        }
-
-        var last = {'directionAngle' : 0, 'outputPower' : 0};
-        var now = {'directionAngle' : 0, 'outputPower' : 0};
-
-        setInterval(function(){
-            now.directionAngle = nippleManager
-        }, 100);
         //var server_ip = <% ServerIP %>;
         var server_streamingPort = '8000';
         var streaming_url = 'http://' + server_ip + ':' + server_streamingPort + '/stream.mjpg';
