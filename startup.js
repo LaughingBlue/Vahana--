@@ -6,7 +6,7 @@ var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 
-var control_core = require('./Control-core.js');
+var control_core = require('./Control-core');
 
 var app = express();
 
