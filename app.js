@@ -47,7 +47,7 @@ module.exports = app;
 
 //custom add
 var ctrlCore = require('./control-core.js');
-core = new ctrlCore();
+var core = new ctrlCore();
 
 core.streaming_on();
 

@@ -11,7 +11,7 @@ try {
     console.log('MODULE LOADING ERR:\n' + err);
 }
 
-module.exports.controlCore = function(){
+module.exports = function(){
 
     this.streaming_on = function() {
         exec = require('child_process').exec;
