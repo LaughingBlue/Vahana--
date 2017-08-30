@@ -29,6 +29,7 @@
     "path": "^0.12.7",
     "pigpio": "^0.6.1",
     "serve-favicon": "~2.4.2",
+    "socket.io": "^2.0.3",
     "underscore": "^1.8.3"
   }
 }
