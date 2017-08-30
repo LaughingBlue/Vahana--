@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-trasData = { title: 'Express', ServerIP: "192.168.1.197" };
+trasData = { ServerIP: "192.168.1.197" };
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
