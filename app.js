@@ -46,7 +46,7 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 //custom add
-var ctrlCore = require('./control-ctrlCore.js');
+var ctrlCore = require('./control-core.js');
 core = new ctrlCore();
 
 core.streaming_on();
