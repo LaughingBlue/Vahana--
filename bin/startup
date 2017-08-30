@@ -88,3 +88,34 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+//custom add
+var socketIO = require('socket.io');
+var socketConnect = socketIO(server);
+var ctrlCore = require('../control-core.js');
+var core = new ctrlCore();
+
+core.streaming_on();
+
+socketConnect.on('connection', function(socket){
+
+  console.log('User connected');
+
+  socket.on('disconnect', function(){
+    console.log('User disconnected');
+  });
+
+  setInterval(function(){
+    socket.on('ctrlData', function(data){
+      if(data.distance != 0){
+        core.move_on(data.angle.degree, data.distance);
+      }
+    });
+  }, 100)
+});
+
+process.on("SIGINT", function () {
+  core.streaming_off();
+  console.log("Caught interrupt signal");
+  process.exit();
+});

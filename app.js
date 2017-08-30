@@ -44,15 +44,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-//custom add
-var ctrlCore = require('./control-core.js');
-var core = new ctrlCore();
-
-core.streaming_on();
-
-process.on("SIGINT", function () {
-  core.streaming_off();
-  console.log("Caught interrupt signal");
-  process.exit();
-});

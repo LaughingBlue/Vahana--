@@ -20,8 +20,6 @@
             background-size: cover;
         }
     </style> -->
-
-
 </head>
 
 <body>
@@ -49,32 +47,29 @@
         var socket = io.connect();
 
         function sendNipple(joystick){
-            socket.emit('ctrlMsg', {
+            socket.emit('ctrlData', {
                 "joystick" : joystick
             });
         }
+
         var server_ip = "<%= ServerIP %>";
-        /*var serverip0 = %= serverip0 %> ;
-		var serverip1 = %= serverip1 %>;
-		var serverip2 = %= serverip2 %> ;
-		var serverip3 = %= serverip3 %>;
-		server_ip = serverip0 + '.' + serverip1 + '.' + serverip2 + '.' + serverip3;*/
         var server_streamingPort = '8000';
         var streaming_url = 'http://' + server_ip + ':' + server_streamingPort + '/stream.mjpg';
         var streamingElement = document.getElementById("camera_view");
 
         function loadstreaming() {
             streamingElement.src = streaming_url;
-        }
+        }        
+        loadstreaming();
 
+        /*debug use
         function offloadstreaming() {
             streamingElement.src = "/images/stream.mjpg.jpg";
             //$("#camera_view").attr("src", "/stream.mjpg.jpg");
             //streamingelement.reload();
         }
-        
-        //offloadstreaming();
-        loadstreaming();
+        offloadstreaming();
+        */        
     </script>
 </body>
 
