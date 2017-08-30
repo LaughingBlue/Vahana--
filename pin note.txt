@@ -1,0 +1,6 @@
+灰 pin7 (GPIO 4)
+白 pin11(GPIO 17)
+紫 pin13(GPIO 27)
+藍 pin15(GPIO 22)
+紅 pin2(DC power 5V)
+黑 pin6(GROUND)

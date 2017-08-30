@@ -1,6 +1,6 @@
 try {
     var Gpio = require('pigpio').Gpio,
-        led = new Gpio(18, { mode: Gpio.OUTPUT }),//12/13/18/19
+        led = new Gpio(18, { mode: Gpio.OUTPUT }),//GPIO 12/13/18/19(pins 32/33/12/35) avoid
         dutyCycle = 0;
     var express = require('express');
     var router = express.Router();
