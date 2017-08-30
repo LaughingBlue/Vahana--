@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+    <title>Control UI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/jquery.mobile-1.4.5.css" />
+    <!-- <style>
+        #camera_view {
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: auto;
+            background: url() no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style> -->
+
+
+</head>
+
+<body>
+    <div data-role="page" id="joystick">
+        <div data-role="header" data-position="fixed">
+            <h1>UI Prototype</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <img id="camera_view" width="100%" height="auto" alt="No Resource Available!">
+        </div>
+    </div>
+
+    <script src="javascripts/jquery-2.1.4.min.js"></script>
+    <script src="javascripts/jquery.mobile-1.4.5.js"></script>
+    <script src="javascripts/socket.io.js"></script>
+    <script src="../node_modules/nipplejs/dist/nipplejs.min.js"></script>
+    <script>
+        var nippleManager = nipplejs.create({
+            zone: document.getElementById('joystick'),
+            mode: 'semi',
+            catchDistance: 150,
+            color: 'blue'
+        });
+
+        var socket = io.connect();
+
+        function sendNipple(joystick){
+            socket.emit('ctrlMsg', {
+                "joystick" : joystick
+            });
+        }
+        var server_ip = <%= ServerIP %>;
+        var server_streamingPort = '8000';
+        var streaming_url = 'http://' + server_ip + ':' + server_streamingPort + '/stream.mjpg';
+        var streamingElement = document.getElementById("camera_view");
+
+        function loadstreaming() {
+            streamingelement.src = streaming_url;
+        }
+
+        function offloadstreaming() {
+            streamingElement.src = "images/stream.mjpg.jpg";
+            //$("#camera_view").attr("src", "/stream.mjpg.jpg");
+            //streamingelement.reload();
+        }
+        
+        offloadstreaming();
+        //loadstreaming();
+    </script>
+</body>
+
 </html>

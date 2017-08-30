@@ -1,2 +1,2 @@
 #!/bin/bash
-node --expose-gc ./startup.js
+node --expose-gc ./bin/startup

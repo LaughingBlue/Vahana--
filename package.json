@@ -2,10 +2,9 @@
   "name": "vahana-kai",
   "version": "0.0.3",
   "description": "Drift!",
-  "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www"
+    "start": "node ./bin/startup"
   },
   "repository": {
     "type": "git",
