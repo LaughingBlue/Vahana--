@@ -9,8 +9,7 @@ var sip = require('underscore')
 .value()
 .address;
 console.log('Server IP='+sip);
-//serverip_array = sip.split('.');
-transData = { ServerIP: sip };//{serverip0: serverip_array[0], serverip1: serverip_array[1], serverip2: serverip_array[2], serverip3: serverip_array[3]};
+transData = { ServerIP: sip };
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
