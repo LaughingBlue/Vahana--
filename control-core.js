@@ -6,12 +6,14 @@ try {
         motorR1 = new Gpio(27, { mode: Gpio.OUTPUT }),
         motorR2 = new Gpio(22, { mode: Gpio.OUTPUT }),
         dutyCycle = 0;
-    const MAX_DUTYCYCLE = 255;
-    const OUPUTPOWER_COEF = 50;
+    
 
 } catch (err) {
     console.log('MODULE LOADING ERR:\n' + err);
 }
+
+const MAX_DUTYCYCLE = 255;
+const OUPUTPOWER_COEF = 50;
 
 module.exports = function(){
 
