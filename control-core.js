@@ -61,45 +61,53 @@ module.exports = function(){
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(targetPower);
+            console.log('E targetPower=' + targetPower);
         } else if (directionAngle > 15 && directionAngle < 75) { //between E~N
             directionAngle -= 15;
             motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
             motorR2.pwmWrite(0);
+            console.log('between E~N targetPower=' + targetPower + ' ' + Math.round(targetPower * (directionAngle / DIR_RANGE)));
         } else if (directionAngle >= 75 && directionAngle <= 105) { //N
             motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
+            console.log('N targetPower=' + targetPower);
         } else if (directionAngle > 105 && directionAngle < 165) { //between N~W
             directionAngle = Math.abs(directionAngle - 165);
             motorL1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
+            console.log('between N~W targetPower=' + targetPower + ' ' + Math.round(targetPower * (directionAngle / DIR_RANGE)));
         } else if (directionAngle >= 165 && directionAngle <= 195) { //W
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(targetPower);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
+            console.log('W targetPower=' + targetPower);
         } else if (directionAngle > 195 && directionAngle < 255) { //between W~S
             directionAngle = Math.abs(directionAngle - 255);
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(targetPower);
+            console.log('between W~S targetPower=' + targetPower + ' ' + Math.round(targetPower * (directionAngle / DIR_RANGE)));
         } else if (directionAngle >= 255 && directionAngle <= 285) { //S
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(targetPower);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(targetPower);
+            console.log('S targetPower=' + targetPower);
         } else if (directionAngle > 285 && directionAngle < 345) { //between S~E
             directionAngle = Math.abs(directionAngle - 345);
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(targetPower);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            console.log('between S~E targetPower=' + targetPower + ' ' + Math.round(targetPower * (directionAngle / DIR_RANGE)));
         }
     }
 
