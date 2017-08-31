@@ -1,6 +1,6 @@
 {
   "name": "vahana-kai",
-  "version": "0.0.9",
+  "version": "0.2.1",
   "description": "Drift!",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

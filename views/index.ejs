@@ -37,11 +37,18 @@
     <script src="/javascripts/socket.io.js"></script>
     <script src="/javascripts/nipplejs.min.js"></script>
     <script>
+        function getSize(element, percent){
+            var tem = (element.clientWidth > element.clientHeight ? element.clientHeight : element.clientWidth);
+            return parseInt(tem * percent);
+        }
+
         var nippleManager = nipplejs.create({
             zone: document.getElementById('joystick'),
-            mode: 'semi',
-            catchDistance: 150,
-            color: 'blue'
+            mode: 'dynamic',
+            //catchDistance: 150,
+            color: 'blue',
+            threshold:0.4,
+            size: getSize(document.body, 0.25)
         });
 
         var socket = io.connect();
