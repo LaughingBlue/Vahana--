@@ -64,7 +64,7 @@
         nippleManager.on('move', function(evt, data) {
             joystickNow.distance = Math.round(data.distance);
             joystickNow.angleDegree = Math.round(data.angle.degree);
-        }).on('end', function(evt, data){
+        }).on('remove', function(evt, data){
             joystickNow.distance = 0;
             joystickNow.angleDegree = 0;
         });
