@@ -57,12 +57,15 @@
         nippleManager.on('move', function(evt, data) {
             joystickNow.distance = Math.round(data.distance);
             joystickNow.angleDegree = Math.round(data.angle.degree);
+        }).on('end', function(evt, data){
+            joystickNow.distance = 0;
+            joystickNow.angleDegree = 0;
         });
 
         setInterval(function(){
             if(joystickNow.distance != joystickLast.distance &&
                joystickNow.angleDegree != joystickLast.angleDegree){
-                   
+
                 joystickLast.distance = joystickNow.distance;
                 joystickLast.angleDegree = joystickNow.angleDegree;
                 sendNipple(joystickNow);
