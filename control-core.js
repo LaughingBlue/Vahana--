@@ -55,8 +55,13 @@ module.exports = function(){
         directionAngle = Math.round(directionAngle);
         powerDomain = Math.round(powerDomain);
         targetPower = Math.round(MAX_DUTYCYCLE * (powerDomain / OUPUTPOWER_COEF));
-
-        if (directionAngle >= 345 || directionAngle <= 15) { //E
+        if(powerDomain == 0){
+            motorL1.pwmWrite(0);
+            motorL2.pwmWrite(0);
+            motorR1.pwmWrite(0);
+            motorR2.pwmWrite(0);
+            console.log('stop');
+        } else if (directionAngle >= 345 || directionAngle <= 15) { //E
             motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(0);

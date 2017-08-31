@@ -45,22 +45,34 @@
         });
 
         var socket = io.connect();
-
         function sendNipple(joystick){
             socket.emit('ctrlData', {
                 "joystick" : joystick
             });
         }
 
+        var joystickLast = {distance: 0, angleDegree: 0};
+        var joystickNow = {distance: 0, angleDegree: 0};
+
         nippleManager.on('move', function(evt, data) {
-            sendNipple(data);
+            joystickNow.distance = Math.round(data.distance);
+            joystickNow.angleDegree = Math.round(data.angle.degree);
         });
+
+        setInterval(function(){
+            if(joystickNow.toString() !== joystickLast.toString()){
+                joystickLast.distance = joystickNow.distance;
+                joystickLast.angleDegree = joystickNow.angleDegree;
+                sendNipple(joystickNow);
+            }
+        }, 100);
 
         var server_ip = "<%= ServerIP %>";
         var server_streamingPort = '8000';
         var streaming_url = 'http://' + server_ip + ':' + server_streamingPort + '/stream.mjpg';
         var streamingElement = document.getElementById("camera_view");
 
+        //camera view
         function loadstreaming() {
             streamingElement.src = streaming_url;
         }        
