@@ -60,7 +60,9 @@
         });
 
         setInterval(function(){
-            if(joystickNow.toString() !== joystickLast.toString()){
+            if(joystickNow.distance != joystickLast.distance &&
+               joystickNow.angleDegree != joystickLast.angleDegree){
+                   
                 joystickLast.distance = joystickNow.distance;
                 joystickLast.angleDegree = joystickNow.angleDegree;
                 sendNipple(joystickNow);
