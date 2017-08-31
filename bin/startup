@@ -107,7 +107,9 @@ socketConnect.on('connection', function(socket){
   
   socket.on('ctrlData', function(data){
     if(data.distance != 0){
-      core.move_on(data['angle']['degree'], data['distance']);
+
+      console.log(data);
+      //core.move_on(data['angle']['degree'], data['distance']);
     }
   });
 
