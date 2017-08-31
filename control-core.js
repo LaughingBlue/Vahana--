@@ -57,7 +57,7 @@ module.exports = function(){
             motorR2.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
         } else if (directionAngle > 15 && directionAngle < 75) { //between E~N
     
-        } else if (directionAngle >= 75 && directionPnAngle <= 105) { //N
+        } else if (directionAngle >= 75 && directionAngle <= 105) { //N
             motorL1.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
