@@ -105,14 +105,16 @@ socketConnect.on('connection', function(socket){
     console.log('User disconnected');
   });
   
-  socket.on('ctrlData', function(data){
-    if(data.distance != 0){
-
-      console.log(data);
-      core.move_on(data.joystick.angle.degree, data.joystick.distance);
-    }
-  });
-
+  setInterval(function(){
+    socket.on('ctrlData', function(data){
+      if(data.distance != 0){
+  
+        console.log(data);
+        core.move_on(data.joystick.angle.degree, data.joystick.distance);
+      }
+    });
+  },100);
+  
 });
 
 process.on("SIGINT", function () {
