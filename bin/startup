@@ -104,14 +104,13 @@ socketConnect.on('connection', function(socket){
   socket.on('disconnect', function(){
     console.log('User disconnected');
   });
-
-  setInterval(function(){
-    socket.on('ctrlData', function(data){
-      if(data.distance != 0){
-        core.move_on(data.angle.degree, data.distance);
-      }
-    });
-  }, 100)
+  
+  socket.on('ctrlData', function(data){
+    if(data.distance != 0){
+      core.move_on(data.angle.degree, data.distance);
+    }
+  });
+  
 });
 
 process.on("SIGINT", function () {
