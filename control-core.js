@@ -111,6 +111,13 @@ module.exports = function(){
         }
     }
 
+    this.resetPWM = function(){
+        motorL1.pwmWrite(0);
+        motorL2.pwmWrite(0);
+        motorR1.pwmWrite(0);
+        motorR2.pwmWrite(0);
+    }
+
     this.forceGC = function () {
         if (global.gc)
             global.gc();

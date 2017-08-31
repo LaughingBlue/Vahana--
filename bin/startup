@@ -108,7 +108,7 @@ socketConnect.on('connection', function(socket){
   socket.on('ctrlData', function(data){
     if(data.distance != 0){
       //console.log(data);
-      core.move_on(data.joystick.angle.degree, data.joystick.distance);
+      setTimeout(core.move_on(data.joystick.angle.degree, data.joystick.distance), 100);
     }
   });
 
@@ -116,6 +116,7 @@ socketConnect.on('connection', function(socket){
 
 process.on("SIGINT", function () {
   core.streaming_off();
+  core.resetPWM();
   console.log("Caught interrupt signal");
   process.exit();
 });
