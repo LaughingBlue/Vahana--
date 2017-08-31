@@ -3,8 +3,8 @@ Just a small project to remake my RC Car.  Try to switch the development tools f
 
 ToDo List:
 * ~~New ENV & New package Test~~
-* Engine Test (TAMIYA motor Orange v2)
-* Camera upgrade
-* Road test Phase_1
-* Control UI renew
+* ~~Engine Test (TAMIYA motor Orange v2)~~
+* ~~Camera program upgrade~~ live view trans speedup
+* ~~Road test Phase_1~~
+* Control UI renew -> NEXT TODO with new feature
 * Road test Phase_2
