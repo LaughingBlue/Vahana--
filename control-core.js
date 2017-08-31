@@ -1,16 +1,16 @@
+/*
 try {
-    //avoid hardware PWM GPIO 12/13/18/19(pins 32/33/12/35) 
-    var Gpio = require('pigpio').Gpio,
-        motorL1 = new Gpio( 4, { mode: Gpio.OUTPUT }),
-        motorL2 = new Gpio(17, { mode: Gpio.OUTPUT }),
-        motorR1 = new Gpio(27, { mode: Gpio.OUTPUT }),
-        motorR2 = new Gpio(22, { mode: Gpio.OUTPUT }),
-        dutyCycle = 0;
-    
-
 } catch (err) {
     console.log('MODULE LOADING ERR:\n' + err);
 }
+*/
+//avoid hardware PWM GPIO 12/13/18/19(pins 32/33/12/35) 
+var Gpio = require('pigpio').Gpio,
+    motorL1 = new Gpio(4, { mode: Gpio.OUTPUT }),
+    motorL2 = new Gpio(17, { mode: Gpio.OUTPUT }),
+    motorR1 = new Gpio(27, { mode: Gpio.OUTPUT }),
+    motorR2 = new Gpio(22, { mode: Gpio.OUTPUT }),
+    dutyCycle = 0;
 
 const MAX_DUTYCYCLE = 255;
 const OUPUTPOWER_COEF = 50;
