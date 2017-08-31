@@ -109,7 +109,7 @@ socketConnect.on('connection', function(socket){
     if(data.distance != 0){
 
       console.log(data);
-      //core.move_on(data['angle']['degree'], data['distance']);
+      core.move_on(data.joystick.angle.degree, data.joystick.distance);
     }
   });
 
