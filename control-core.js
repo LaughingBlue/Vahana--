@@ -15,6 +15,10 @@ var Gpio = require('pigpio').Gpio,
 const MAX_DUTYCYCLE = 255;
 const OUPUTPOWER_COEF = 50;
 
+function lowestOutputCheck(value){
+    return (value > 80 ? value : 80);
+}
+
 module.exports = function(){
 
     this.streaming_on = function() {
@@ -54,65 +58,82 @@ module.exports = function(){
     this.move_on = function(directionAngle, powerDomain) {
         directionAngle = Math.round(directionAngle);
         powerDomain = (powerDomain > 1 ? 1 : powerDomain);
-        targetPower = Math.round(MAX_DUTYCYCLE * powerDomain);
+        targetPower = lowestOutputCheck( Math.round(MAX_DUTYCYCLE * powerDomain));
+
         if(powerDomain == 0){
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(0);
             console.log('stop');
+
         } else if (directionAngle >= 345 || directionAngle <= 15) { //E
             motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(targetPower);
             console.log('E LeftOutput=' + targetPower + ' RightOutput=' + targetPower);
+
         } else if (directionAngle > 15 && directionAngle < 75) { //between E~N
             directionAngle -= 15;
             motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
-            motorR1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+
+            var rightOutput = lowestOutputCheck(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorR1.pwmWrite(rightOutput);
             motorR2.pwmWrite(0);
-            console.log('between E~N LeftOutput=' + targetPower + ' RightOutput=' + Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            console.log('between E~N LeftOutput=' + targetPower + ' RightOutput=' + rightOutput);
+
         } else if (directionAngle >= 75 && directionAngle <= 105) { //N
             motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
             console.log('N LeftOutput=' + targetPower + ' RightOutput=' + targetPower);
+
         } else if (directionAngle > 105 && directionAngle < 165) { //between N~W
             directionAngle = Math.abs(directionAngle - 165);
+            var leftOutput = lowestOutputCheck(Math.round(targetPower * (directionAngle / DIR_RANGE)));
             motorL1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
-            console.log('between N~W LeftOutput=' + Math.round(targetPower * (directionAngle / DIR_RANGE)) + ' RightOutput=' + targetPower);
+            console.log('between N~W LeftOutput=' + leftOutput + ' RightOutput=' + targetPower);
+
         } else if (directionAngle >= 165 && directionAngle <= 195) { //W
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(targetPower);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
             console.log('W LeftOutput=' + targetPower + ' RightOutput=' + targetPower);
+
         } else if (directionAngle > 195 && directionAngle < 255) { //between W~S
             directionAngle = Math.abs(directionAngle - 255);
+            var leftOutput = lowestOutputCheck(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+
             motorL1.pwmWrite(0);
-            motorL2.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorL2.pwmWrite(leftOutput);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(targetPower);
-            console.log('between W~S LeftOutput=' + Math.round(targetPower * (directionAngle / DIR_RANGE)) + ' RightOutput=' + targetPower);
+            console.log('between W~S LeftOutput=' + leftOutput + ' RightOutput=' + targetPower);
+
         } else if (directionAngle >= 255 && directionAngle <= 285) { //S
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(targetPower);
             motorR1.pwmWrite(0);
             motorR2.pwmWrite(targetPower);
             console.log('S LeftOutput=' + targetPower + ' RightOutput=' + targetPower);
+            
         } else if (directionAngle > 285 && directionAngle < 345) { //between S~E
             directionAngle = Math.abs(directionAngle - 345);
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(targetPower);
+
+            var rightOutput = lowestOutputCheck(Math.round(targetPower * (directionAngle / DIR_RANGE)));
             motorR1.pwmWrite(0);
-            motorR2.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
-            console.log('between S~E LeftOutput=' + targetPower + ' RightOutput=' + Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorR2.pwmWrite(rightOutput);
+            console.log('between S~E LeftOutput=' + targetPower + ' RightOutput=' + rightOutput);
+
         }
     }
 
