@@ -16,7 +16,7 @@ const MAX_DUTYCYCLE = 255;
 const OUPUTPOWER_COEF = 50;
 
 function lowestOutputCheck(value){
-    return (value > 80 ? value : 80);
+    return (value > 90 ? value : 90);
 }
 
 module.exports = function(){
