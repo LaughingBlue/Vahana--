@@ -44,8 +44,9 @@
 
         var nippleManager = nipplejs.create({
             zone: document.getElementById('joystick'),
-            mode: 'dynamic',
-            //catchDistance: 150,
+            mode: 'static',
+            position: {right: '20%', top: '50%'},
+            catchDistance: 150,
             color: 'blue',
             threshold:0.4,
             size: getSize(document.body, 0.25)
@@ -64,7 +65,7 @@
         nippleManager.on('move', function(evt, data) {
             joystickNow.distance = Math.round(data.distance);
             joystickNow.angleDegree = Math.round(data.angle.degree);
-        }).on('remove', function(evt, data){
+        }).on('end', function(evt, data){
             joystickNow.distance = 0;
             joystickNow.angleDegree = 0;
         });
