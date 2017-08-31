@@ -1,9 +1,4 @@
-/*
-try {
-} catch (err) {
-    console.log('MODULE LOADING ERR:\n' + err);
-}
-*/
+
 //avoid hardware PWM GPIO 12/13/18/19(pins 32/33/12/35) 
 var Gpio = require('pigpio').Gpio,
     motorL1 = new Gpio(4, { mode: Gpio.OUTPUT }),
@@ -13,7 +8,6 @@ var Gpio = require('pigpio').Gpio,
     dutyCycle = 0;
 
 const MAX_DUTYCYCLE = 255;
-const OUPUTPOWER_COEF = 50;
 
 function lowestOutputCheck(value){
     return (value > 90 ? value : 90);
