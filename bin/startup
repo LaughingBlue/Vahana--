@@ -107,10 +107,10 @@ socketConnect.on('connection', function(socket){
   
   socket.on('ctrlData', function(data){
     if(data.distance != 0){
-      core.move_on(data.angle.degree, data.distance);
+      core.move_on(data['angle']['degree'], data['distance']);
     }
   });
-  
+
 });
 
 process.on("SIGINT", function () {
