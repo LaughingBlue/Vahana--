@@ -48,38 +48,58 @@ module.exports = function(){
         fs.writeFileSync('./PiCam-Streamer-status', 'off');
     }
 
-    this.move_on = function(directionAngle, outputPower) {
+    var targetPower;
+    const DIR_RANGE = 60;
+
+    this.move_on = function(directionAngle, powerDomain) {
         directionAngle = Math.round(directionAngle);
-        outputPower = Math.round(outputPower);
+        powerDomain = Math.round(powerDomain);
+        targetPower = Math.round(MAX_DUTYCYCLE * (powerDomain / OUPUTPOWER_COEF));
 
         if (directionAngle >= 345 || directionAngle <= 15) { //E
-            motorL1.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(0);
-            motorR2.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            motorR2.pwmWrite(targetPower);
         } else if (directionAngle > 15 && directionAngle < 75) { //between E~N
-    
-        } else if (directionAngle >= 75 && directionAngle <= 105) { //N
-            motorL1.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            directionAngle -= 15;
+            motorL1.pwmWrite(targetPower);
             motorL2.pwmWrite(0);
-            motorR1.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            motorR1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorR2.pwmWrite(0);
+        } else if (directionAngle >= 75 && directionAngle <= 105) { //N
+            motorL1.pwmWrite(targetPower);
+            motorL2.pwmWrite(0);
+            motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
         } else if (directionAngle > 105 && directionAngle < 165) { //between N~W
-    
+            directionAngle = Math.abs(directionAngle - 165);
+            motorL1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorL2.pwmWrite(0);
+            motorR1.pwmWrite(targetPower);
+            motorR2.pwmWrite(0);
         } else if (directionAngle >= 165 && directionAngle <= 195) { //W
             motorL1.pwmWrite(0);
-            motorL2.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
-            motorR1.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            motorL2.pwmWrite(targetPower);
+            motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
         } else if (directionAngle > 195 && directionAngle < 255) { //between W~S
-    
+            directionAngle = Math.abs(directionAngle - 255);
+            motorL1.pwmWrite(0);
+            motorL2.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorR1.pwmWrite(0);
+            motorR2.pwmWrite(targetPower);
         } else if (directionAngle >= 255 && directionAngle <= 285) { //S
             motorL1.pwmWrite(0);
-            motorL2.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            motorL2.pwmWrite(targetPower);
             motorR1.pwmWrite(0);
-            motorR2.pwmWrite(MAX_DUTYCYCLE * (outputPower % OUPUTPOWER_COEF));
+            motorR2.pwmWrite(targetPower);
         } else if (directionAngle > 285 && directionAngle < 345) { //between S~E
-    
+            directionAngle = Math.abs(directionAngle - 345);
+            motorL1.pwmWrite(0);
+            motorL2.pwmWrite(targetPower);
+            motorR1.pwmWrite(0);
+            motorR2.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
         }
     }
 
