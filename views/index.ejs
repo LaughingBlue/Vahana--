@@ -63,7 +63,7 @@
         });
 
         setInterval(function(){
-            if(joystickNow.distance != joystickLast.distance &&
+            if(joystickNow.distance != joystickLast.distance ||
                joystickNow.angleDegree != joystickLast.angleDegree){
 
                 joystickLast.distance = joystickNow.distance;
