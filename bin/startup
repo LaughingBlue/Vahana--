@@ -106,7 +106,7 @@ socketConnect.on('connection', function(socket){
   });
   
   socket.on('ctrlData', function(data){
-      core.move_on(data.joystick.angleDegree, data.joystick.distance);
+      core.move_on(data.joystick.angleDegree, data.joystick.force);
   });
 
 });

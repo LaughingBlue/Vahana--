@@ -53,8 +53,8 @@ module.exports = function(){
 
     this.move_on = function(directionAngle, powerDomain) {
         directionAngle = Math.round(directionAngle);
-        powerDomain = Math.round(powerDomain);
-        targetPower = Math.round(MAX_DUTYCYCLE * (powerDomain / OUPUTPOWER_COEF));
+        //powerDomain = Math.round(powerDomain);
+        targetPower = Math.round(MAX_DUTYCYCLE * powerDomain);
         if(powerDomain == 0){
             motorL1.pwmWrite(0);
             motorL2.pwmWrite(0);

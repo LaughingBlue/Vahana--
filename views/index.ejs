@@ -44,11 +44,12 @@
 
         var nippleManager = nipplejs.create({
             zone: document.getElementById('joystick'),
-            mode: 'static',
-            position: {right: '20%', top: '50%'},
-            catchDistance: 150,
+            mode: 'dynamic',
+            multitouch: false,
+            //position: {right: '20%', top: '50%'},
+            //catchforce: 150,
             color: 'blue',
-            threshold:0.4,
+            threshold: 0.4,
             size: getSize(document.body, 0.25)
         });
 
@@ -59,22 +60,23 @@
             });
         }
 
-        var joystickLast = {distance: 0, angleDegree: 0};
-        var joystickNow = {distance: 0, angleDegree: 0};
+        var joystickLast = {force: 0, angleDegree: 0};
+        var joystickNow = {force: 0, angleDegree: 0};
 
         nippleManager.on('move', function(evt, data) {
-            joystickNow.distance = Math.round(data.distance);
+            joystickNow.force = data.force;
             joystickNow.angleDegree = Math.round(data.angle.degree);
         }).on('end', function(evt, data){
-            joystickNow.distance = 0;
+            joystickNow.force = 0;
             joystickNow.angleDegree = 0;
         });
 
         setInterval(function(){
-            if(joystickNow.distance != joystickLast.distance ||
+            if(joystickNow.force != joystickLast.force ||
                joystickNow.angleDegree != joystickLast.angleDegree){
-
-                joystickLast.distance = joystickNow.distance;
+                
+                joystickLast.force = (joystickLast.force > 1 ? 1 : joystickLast.force);
+                joystickLast.force = joystickNow.force;
                 joystickLast.angleDegree = joystickNow.angleDegree;
                 sendNipple(joystickNow);
             }
