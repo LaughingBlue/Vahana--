@@ -21,27 +21,27 @@ module.exports = function(){
         pcs_pid = web_vs.pid + 1;
         console.log('pid=' + pcs_pid);
     
-        // 將pid of Web Video Streaming存入檔案中
+        // save pid of Web Video Streaming
         fs = require('fs');
         fs.writeFileSync('./PiCam-Streamer-pid', pcs_pid);
     
-        // 將on存入Web Video Streaming的狀態檔中
+        // save Web Video Streaming status as on
         fs = require('fs');
         fs.writeFileSync('./PiCam-Streamer-status', 'on');
         console.log('The pid and status of web video streaming is saved!');
     }
 
     this.streaming_off = function() {
-        // 讀取pid of Web Video Streaming
+        // read pid of Web Video Streaming
         fs = require('fs');
         pcs_pid = fs.readFileSync('./PiCam-Streamer-pid', 'utf8');
 
-        // 透過pid關閉(殺掉)Web Video Streaming
+        // kill Web Video Streaming with pid
         exec = require('child_process').exec;
         exec('sudo kill ' + pcs_pid);
         console.log('The ' + pcs_pid + ' process is killed!');
 
-        // 將off存入Web Video Streaming的狀態檔中
+        // save Web Video Streaming status as off
         fs = require('fs');
         fs.writeFileSync('./PiCam-Streamer-status', 'off');
     }
@@ -55,10 +55,7 @@ module.exports = function(){
         targetPower = lowestOutputCheck( Math.round(MAX_DUTYCYCLE * powerDomain));
 
         if(powerDomain == 0){
-            motorL1.pwmWrite(0);
-            motorL2.pwmWrite(0);
-            motorR1.pwmWrite(0);
-            motorR2.pwmWrite(0);
+            this.resetPWM();
             console.log('stop');
 
         } else if (directionAngle >= 345 || directionAngle <= 15) { //E
@@ -88,7 +85,7 @@ module.exports = function(){
         } else if (directionAngle > 105 && directionAngle < 165) { //between N~W
             directionAngle = Math.abs(directionAngle - 165);
             var leftOutput = lowestOutputCheck(Math.round(targetPower * (directionAngle / DIR_RANGE)));
-            motorL1.pwmWrite(Math.round(targetPower * (directionAngle / DIR_RANGE)));
+            motorL1.pwmWrite(leftOutput);
             motorL2.pwmWrite(0);
             motorR1.pwmWrite(targetPower);
             motorR2.pwmWrite(0);
@@ -142,6 +139,6 @@ module.exports = function(){
         if (global.gc)
             global.gc();
         else
-            console.warn('[Garbage Collection] NOT AVAILABLE ! Restart Vahana-KAI core as `node --expose-gc start.js`.');
+            console.warn('[Garbage Collection] NOT AVAILABLE ! Restart Vahana-KAI core as `node --expose-gc startup`.');
     }
 }

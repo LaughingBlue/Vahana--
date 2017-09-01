@@ -4,7 +4,12 @@ Just a small project to remake my RC Car.  Try to switch the development tools f
 ToDo List:
 * ~~New ENV & New package Test~~
 * ~~Engine Test (TAMIYA motor Orange v2)~~
-* ~~Camera program upgrade~~ live view trans speedup
+* ~~Camera program upgrade~~ live view trans speedup!
 * ~~Road test Phase_1~~
-* Control UI renew -> NEXT TODO with new feature
+* Control UI renew -> NEXT TODO with new feature (a lot of Sensors..)
 * Road test Phase_2
+
+Plannig
+* Flying Control System add
+* Calibration Flight trail
+* Comprehensive Test
