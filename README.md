@@ -1,7 +1,7 @@
 # Vahana-KAI
 Just a small project to remake my RC Car.  Try to switch the development tools from [Python(hardware control) + Node.js(UI)] to pure Node.js with C library for faster reaction.
 
-![demo](https://github.com/LaughingBlue/Vahana-KAI/blob/master/demo/Record_2017_09_01_16_02_02_386.gif)
+![demo](./demo/Record_2017_09_01_16_02_02_386.gif)
 
 ToDo List:
 * ~~New ENV & New package Test~~
